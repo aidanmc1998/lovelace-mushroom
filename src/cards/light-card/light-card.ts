@@ -193,9 +193,24 @@ export class LightCard extends MushroomBaseCard implements LovelaceCard {
         }
 
         const rtl = computeRTL(this.hass);
-
+        
+        let backgroundColor = '';
+    
+        
+        if (stateObj.state === 'on') {
+            
+            backgroundColor = 'green';
+        } else {
+            
+            backgroundColor = 'red';
+        }
+    
+        
+        const cardStyle = {
+            'ha-card-background-color': backgroundColor,
+        };
         return html`
-            <ha-card class=${classMap({ "fill-container": appearance.fill_container })}>
+            <ha-card style=${styleMap(cardStyle)} class=${classMap({ "fill-container": appearance.fill_container })}>
                 <mushroom-card .appearance=${appearance} ?rtl=${rtl}>
                     <mushroom-state-item
                         ?rtl=${rtl}
